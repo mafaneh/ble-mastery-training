@@ -4,7 +4,7 @@
     <properties key="keywords" value="universal\ configurator"/>
     <properties key="solutionReferenceId" value="bt_soc_blinky_link2.SimplicityStudio.bt_soc_blinky_link2.slcp"/>
     <properties key="projectFilePaths" value="bt_soc_blinky_link2/bt_soc_blinky_link2.slcp"/>
-    <properties key="readmeFiles" value="bt_soc_blinky_link2/README.md"/>
+    <properties key="readmeFiles" value="bt_soc_blinky_link2/readme.md"/>
     <properties key="boardCompatibility" value="brd2601b brd2703a brd2704a"/>
     <properties key="partCompatibility" value=".*mgm24.* .*efr32[bm]g24.* .*efr32[x]g24.*"/>
     <properties key="ideCompatibility" value="iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
@@ -12,7 +12,7 @@
     <properties key="toolchainCompatibility" value="gcc iar segger"/>
     <properties key="category" value="Bluetooth Examples"/>
     <properties key="quality" value="EXPERIMENTAL"/>
-    <properties key="filters" value="Capability|Machine\ Learning Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Advanced Wireless\ Technology|Bluetooth"/>
+    <properties key="filters" value="Advanced Wireless\ Technology|Bluetooth"/>
     <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
   </descriptors>
 </model:MDescriptors>  
