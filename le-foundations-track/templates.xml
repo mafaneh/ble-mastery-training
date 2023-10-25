@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?><model:MDescriptors xmlns:model="http://www.silabs.com/ss/Studio.ecore">
+  <descriptors name="bt-adv-basics" label="Bluetooth - Adv Basics - Novel Bits" description="This is an example for learning the basics of Bluetooth advertising.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="solutionReferenceId" value="bt-adv-basics.SimplicityStudio.bt-adv-basics.slcp"/>
+    <properties key="projectFilePaths" value="1 - advertising/bt-adv-basics/bt-adv-basics.slcp"/>
+    <properties key="readmeFiles" value="1 - advertising/bt-adv-basics/readme.md"/>
+    <properties key="boardCompatibility" value="brd2601b brd2703a brd2704a"/>
+    <properties key="partCompatibility" value=".*mgm24.* .*efr32[bm]g24.* .*efr32[x]g24.*"/>
+    <properties key="ideCompatibility" value="iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="ideCompatibility" value="iar-embedded-workbench makefile-ide segger-embedded-studio simplicity-ide"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Bluetooth Examples"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="filters" value="Advanced Wireless\ Technology|Bluetooth"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+  </descriptors>
+</model:MDescriptors>  
