@@ -80,7 +80,7 @@
 
     <!--LED-->
     <characteristic const="false" id="led_char" name="LED" sourceId="" uuid="27863631-b3f3-4328-9227-20c831860fd1">
-      <value length="0" type="hex" variable_length="false">00</value>
+      <value length="1" type="hex" variable_length="false">00</value>
       <properties>
         <write authenticated="false" bonded="false" encrypted="false"/>
       </properties>
@@ -88,7 +88,7 @@
 
     <!--Button-->
     <characteristic const="false" id="button_char" name="Button" sourceId="" uuid="1b5a0e38-7894-4043-b9c2-141f7ce810b5">
-      <value length="0" type="hex" variable_length="false">00</value>
+      <value length="1" type="hex" variable_length="false">00</value>
       <properties>
         <notify authenticated="false" bonded="false" encrypted="false"/>
       </properties>
