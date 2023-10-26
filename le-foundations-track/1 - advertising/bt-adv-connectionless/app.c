@@ -67,12 +67,30 @@ SL_WEAK void app_process_action(void)
 void sl_bt_on_event(sl_bt_msg_t *evt)
 {
   sl_status_t sc;
+  bd_addr address;
+  uint8_t address_type;
 
   switch (SL_BT_MSG_ID(evt->header)) {
     // -------------------------------
     // This event indicates the device has started and the radio is ready.
     // Do not call any stack command before receiving this boot event!
     case sl_bt_evt_system_boot_id:
+
+      // Log message indicating the start of the application
+      app_log("BLE Advertising Connection-less Example Started!\r\n");
+
+      // Print the Bluetooth Address (note the reversed order of the bytes)
+      sc = sl_bt_system_get_identity_address(&address, &address_type);
+      app_assert_status(sc);
+
+      app_log("Bluetooth Device Address: ");
+      for (int i=0; i<5; i++)
+        {
+          app_log("%02X:", address.addr[5-i]);
+        }
+      app_log("%02X (%s)\r\n", address.addr[0], address_type == 0 ? "Public device address":"Static device address");
+
+
       // Create an advertising set.
       sc = sl_bt_advertiser_create_set(&advertising_set_handle);
       app_assert_status(sc);
@@ -91,6 +109,9 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
         0);  // max. num. adv. events
       app_assert_status(sc);
 
+      // TODO: Uncomment one of the following snippets to choose between scannable
+      //       and non-scannable non-connectable advertising modes
+
       // Start advertising in connectionless mode(s)
       // 1- Non-connectable non-scannable mode
       sc = sl_bt_legacy_advertiser_start(advertising_set_handle,
@@ -101,25 +122,6 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
 //      sc = sl_bt_legacy_advertiser_start(advertising_set_handle,
 //                                         sl_bt_advertiser_scannable_non_connectable);
 //      app_assert_status(sc);
-      break;
-
-    // -------------------------------
-    // This event indicates that a new connection was opened.
-    case sl_bt_evt_connection_opened_id:
-      break;
-
-    // -------------------------------
-    // This event indicates that a connection was closed.
-    case sl_bt_evt_connection_closed_id:
-      // Generate data for advertising
-      sc = sl_bt_legacy_advertiser_generate_data(advertising_set_handle,
-                                                 sl_bt_advertiser_general_discoverable);
-      app_assert_status(sc);
-
-      // Restart advertising after client has disconnected.
-      sc = sl_bt_legacy_advertiser_start(advertising_set_handle,
-                                         sl_bt_advertiser_connectable_scannable);
-      app_assert_status(sc);
       break;
 
     ///////////////////////////////////////////////////////////////////////////
