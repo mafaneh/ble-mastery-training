@@ -67,12 +67,29 @@ SL_WEAK void app_process_action(void)
 void sl_bt_on_event(sl_bt_msg_t *evt)
 {
   sl_status_t sc;
+  bd_addr address;
+  uint8_t address_type;
 
   switch (SL_BT_MSG_ID(evt->header)) {
     // -------------------------------
     // This event indicates the device has started and the radio is ready.
     // Do not call any stack command before receiving this boot event!
     case sl_bt_evt_system_boot_id:
+
+      // Log message indicating the start of the application
+      app_log("BLE Advertising Connection-oriented Example Started!\r\n");
+
+      // Print the Bluetooth Address (note the reversed order of the bytes)
+      sc = sl_bt_system_get_identity_address(&address, &address_type);
+      app_assert_status(sc);
+
+      app_log("Bluetooth Device Address: ");
+      for (int i=0; i<5; i++)
+        {
+          app_log("%02X:", address.addr[5-i]);
+        }
+      app_log("%02X (%s)\r\n", address.addr[0], address_type == 0 ? "Public device address":"Static device address");
+
       // Create an advertising set.
       sc = sl_bt_advertiser_create_set(&advertising_set_handle);
       app_assert_status(sc);
