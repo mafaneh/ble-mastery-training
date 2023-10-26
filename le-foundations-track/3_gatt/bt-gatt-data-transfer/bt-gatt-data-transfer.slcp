@@ -27,6 +27,8 @@ sdk: {id: gecko_sdk, version: 4.3.2}
 toolchain_settings: []
 component:
 - {id: brd2601b}
+- instance: [btn0]
+  id: simple_button
 - {id: bluetooth_feature_gatt_server}
 - {id: in_place_ota_dfu}
 - {id: bluetooth_feature_sm}
@@ -34,6 +36,8 @@ component:
 - {id: bluetooth_feature_legacy_advertiser}
 - {id: gatt_configuration}
 - {id: gatt_service_device_information}
+- instance: [led0]
+  id: simple_led
 - {id: bluetooth_stack}
 - {id: rail_util_pti}
 - {id: bluetooth_feature_gatt}

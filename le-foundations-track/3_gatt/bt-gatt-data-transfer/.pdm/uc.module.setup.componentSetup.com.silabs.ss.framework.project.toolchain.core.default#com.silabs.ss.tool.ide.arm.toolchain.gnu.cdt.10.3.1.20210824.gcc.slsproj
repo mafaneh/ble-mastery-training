@@ -110,6 +110,36 @@
           <file name="btl_reset_info.h" linked="false" uri="studio:/sdk/platform/bootloader/api/btl_reset_info.h"/>
         </folder>
       </folder>
+      <folder name="driver">
+        <folder name="button">
+          <folder name="src">
+            <file name="sl_button.c" linked="false" uri="studio:/sdk/platform/driver/button/src/sl_button.c"/>
+            <file name="sl_simple_button.c" linked="false" uri="studio:/sdk/platform/driver/button/src/sl_simple_button.c"/>
+          </folder>
+          <folder name="inc">
+            <file name="sl_button.h" linked="false" uri="studio:/sdk/platform/driver/button/inc/sl_button.h"/>
+            <file name="sl_simple_button.h" linked="false" uri="studio:/sdk/platform/driver/button/inc/sl_simple_button.h"/>
+          </folder>
+        </folder>
+        <folder name="debug">
+          <folder name="src">
+            <file name="sl_debug_swo.c" linked="false" uri="studio:/sdk/platform/driver/debug/src/sl_debug_swo.c"/>
+          </folder>
+          <folder name="inc">
+            <file name="sl_debug_swo.h" linked="false" uri="studio:/sdk/platform/driver/debug/inc/sl_debug_swo.h"/>
+          </folder>
+        </folder>
+        <folder name="leddrv">
+          <folder name="src">
+            <file name="sl_led.c" linked="false" uri="studio:/sdk/platform/driver/leddrv/src/sl_led.c"/>
+            <file name="sl_simple_led.c" linked="false" uri="studio:/sdk/platform/driver/leddrv/src/sl_simple_led.c"/>
+          </folder>
+          <folder name="inc">
+            <file name="sl_led.h" linked="false" uri="studio:/sdk/platform/driver/leddrv/inc/sl_led.h"/>
+            <file name="sl_simple_led.h" linked="false" uri="studio:/sdk/platform/driver/leddrv/inc/sl_simple_led.h"/>
+          </folder>
+        </folder>
+      </folder>
       <folder name="CMSIS">
         <folder name="Core">
           <folder name="Include">
@@ -119,16 +149,6 @@
             <file name="cmsis_gcc.h" linked="false" uri="studio:/sdk/platform/CMSIS/Core/Include/cmsis_gcc.h"/>
             <file name="core_cm33.h" linked="false" uri="studio:/sdk/platform/CMSIS/Core/Include/core_cm33.h"/>
             <file name="mpu_armv8.h" linked="false" uri="studio:/sdk/platform/CMSIS/Core/Include/mpu_armv8.h"/>
-          </folder>
-        </folder>
-      </folder>
-      <folder name="driver">
-        <folder name="debug">
-          <folder name="src">
-            <file name="sl_debug_swo.c" linked="false" uri="studio:/sdk/platform/driver/debug/src/sl_debug_swo.c"/>
-          </folder>
-          <folder name="inc">
-            <file name="sl_debug_swo.h" linked="false" uri="studio:/sdk/platform/driver/debug/inc/sl_debug_swo.h"/>
           </folder>
         </folder>
       </folder>
@@ -245,6 +265,14 @@
         <folder name="common">
           <folder name="inc">
             <file name="ecode.h" linked="false" uri="studio:/sdk/platform/emdrv/common/inc/ecode.h"/>
+          </folder>
+        </folder>
+        <folder name="gpiointerrupt">
+          <folder name="src">
+            <file name="gpiointerrupt.c" linked="false" uri="studio:/sdk/platform/emdrv/gpiointerrupt/src/gpiointerrupt.c"/>
+          </folder>
+          <folder name="inc">
+            <file name="gpiointerrupt.h" linked="false" uri="studio:/sdk/platform/emdrv/gpiointerrupt/inc/gpiointerrupt.h"/>
           </folder>
         </folder>
         <folder name="nvm3">
@@ -805,6 +833,7 @@
   <includePath uri="studio:/project/gecko_sdk_4.3.2/hardware/board/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/bootloader"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/bootloader/api"/>
+  <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/driver/button/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/CMSIS/Core/Include"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/hardware/driver/configuration_over_swo/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/driver/debug/inc"/>
@@ -813,9 +842,11 @@
   <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/emdrv/common/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/emlib/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/app/bluetooth/common/gatt_service_device_information"/>
+  <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/emdrv/gpiointerrupt/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/service/hfxo_manager/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/app/bluetooth/common/in_place_ota_dfu"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/service/iostream/inc"/>
+  <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/driver/leddrv/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/security/sl_component/sl_mbedtls_support/config"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/security/sl_component/sl_mbedtls_support/config/preset"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/security/sl_component/sl_mbedtls_support/inc"/>
