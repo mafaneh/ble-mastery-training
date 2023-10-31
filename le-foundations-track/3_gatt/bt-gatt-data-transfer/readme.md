@@ -1,26 +1,8 @@
-# SoC - Empty
+# bt-gatt-data-transfer - Example
 
-The Bluetooth SoC-Empty example is a project that you can use as a template for any standalone Bluetooth application.
+The GATT Data Transfer example demonstrates adding custom services and characteristics to your Bluetooth LE Peripheral application.
 
-> Note: this example expects a specific Gecko Bootloader to be present on your device. For details see the Troubleshooting section.
-
-## Getting Started
-
-To learn the Bluetooth technology basics, see [UG103.14: Bluetooth LE Fundamentals](https://www.silabs.com/documents/public/user-guides/ug103-14-fundamentals-ble.pdf).
-
-To get started with Silicon Labs Bluetooth and Simplicity Studio, see [QSG169: Bluetooth SDK v3.x Quick Start Guide](https://www.silabs.com/documents/public/quick-start-guides/qsg169-bluetooth-sdk-v3x-quick-start-guide.pdf).
-
-The term SoC stands for "System on Chip", meaning that this is a standalone application that runs on the EFR32/BGM and does not require any external MCU or other active components to operate.
-
-As the name implies, the example is an (almost) empty template that has only the bare minimum to make a working Bluetooth application. This skeleton can be extended with the application logic.
-
-The development of a Bluetooth applications consist of three main steps:
-
-* Designing the GATT database
-* Responding to the events raised by the Bluetooth stack
-* Implementing additional application logic
-
-These steps are covered in the following sections. To learn more about programming an SoC application, see [UG434: Silicon Labs Bluetooth ® C Application Developer's Guide for SDK v3.x](https://www.silabs.com/documents/public/user-guides/ug434-bluetooth-c-soc-dev-guide-sdk-v3x.pdf).
+> Note: this example expects a specific Gecko Bootloader to be present on your device. For details, please take a look at the Troubleshooting section below.
 
 ## Designing the GATT Database
 
@@ -32,33 +14,209 @@ To learn how to use the GATT Configurator, see [UG438: GATT Configurator User’
 
 ## Responding to Bluetooth Events
 
-A Bluetooth application is event driven. The Bluetooth stack generates events e.g., when a remote device connects or disconnects or when it writes a characteristic in the local GATT database. The application has to handle these events in the `sl_bt_on_event()` function. The prototype of this function is implemented in *app.c*. To handle more events, the switch-case statement of this function is to be extended. For the list of Bluetooth events, see the online [Bluetooth API Reference](https://docs.silabs.com/bluetooth/latest/).
+A Bluetooth application is event-driven. The Bluetooth stack generates events, e.g., when a remote device connects or disconnects or when it writes a characteristic in the local GATT database. The application has to handle these events in the `sl_bt_on_event()` function. The prototype of this function is implemented in *app.c*. To handle more events, the switch-case statement of this function is to be extended. For the list of Bluetooth events, see the online [Bluetooth API Reference](https://docs.silabs.com/bluetooth/latest/).
 
-## Implementing Application Logic
+## Implementation on top of SOC-Empty
 
-Additional application logic has to be implemented in the `app_init()` and `app_process_action()` functions. Find the definitions of these functions in *app.c*. The `app_init()` function is called once when the device is booted, and `app_process_action()` is called repeatedly in a while(1) loop. For example, you can poll peripherals in this function. To save energy and to have this function called at specific intervals only, for example once every second, use the services of the [Sleeptimer](https://docs.silabs.com/gecko-platform/latest/service/api/group-sleeptimer). If you need a more sophisticated application, consider using RTOS (see [AN1260: Integrating v3.x Silicon Labs Bluetooth Applications with Real-Time Operating Systems](https://www.silabs.com/documents/public/application-notes/an1260-integrating-v3x-bluetooth-applications-with-rtos.pdf)).
+- Operation/Workflow
+    - Start with an existing example (SOC empty)
+    - Responding to the events raised by the Bluetooth stack
+    - Start with example: soc_empty
+    - Add Log component
+    - Add USART (for logging messages)
+    - Add simple LED
+    - Add simple Button
 
-## Features Already Added to the SOC-Empty Application
-
-The SOC-Empty application is ***almost*** empty. It implements a basic application to demonstrate how to handle events, how to use the GATT database, and how to add software components.
-
-* A simple application is implemented in the event handler function that starts advertising on boot (and on connection_closed event). This makes it possible for remote devices to find the device and connect to it.
-* A simple GATT database is defined by adding Generic Access and Device Information services. This makes it possible for remote devices to read out some basic information such as the device name.
-* The OTA DFU software component is added, which extends both the event handlers (see *sl_ota_dfu.c*) and the GATT database (see *ota_dfu.xml*). This makes it possible to make Over-The-Air Device-Firmware-Upgrade without any additional application code.
-
-## Testing the SOC-Empty Application
-
-As described above, an empty example does nothing except advertising and letting other devices connect and read its basic GATT database. To test this feature, do the following:
-
-1. Build and flash the SoC-Empty example to your device.
-2. Make sure a bootloader is installed. See the Troubleshooting section.
-3. Download the **EFR Connect** smartphone app, available on [iOS](https://apps.apple.com/us/app/efr-connect/id1030932759) and [Android](https://play.google.com/store/apps/details?id=com.siliconlabs.bledemo).
-4. Open the app and choose the Bluetooth Browser.
-   ![EFR Connect start screen](image/readme_img2.png)
-5. Now you should find your device advertising as "Empty Example". Tap **Connect**.
-   ![Bluetooth Browser](image/readme_img3.png)
-6. The connection is opened, and the GATT database is automatically discovered. Find the device name characteristic under Generic Access service and try to read out the device name.
-   ![GATT database of the device](image/readme_img4.png)
+- Simple example
+    - GATT Configurator
+    - gatt_db.h generated based on GATT configuration
+    - **#include** "gatt_db.h"
+    - Define ID for chars that we need to interact with in code
+    - don’t include “gattdb_” in the name. This is what you use to reference the characteristic
+    - LED - control
+    - Button - reporting status
+    - 
+- LED
+    - Install Simple LED (Platform → Driver → LED → Simple LED)
+    - https://docs.silabs.com/gecko-platform/3.0/driver/api/group-led
+    - **#include** "sl_simple_led_instances.h"
+    
+    ```
+    // This event indicates that the value of an attribute in the local GATT
+        // database was changed by a remote GATT client.
+    
+        case sl_bt_evt_gatt_server_attribute_value_id:
+          // The value of the gattdb_led_control characteristic was changed.
+          if (gattdb_led_state == evt->data.evt_gatt_server_attribute_value.attribute) {
+            uint8_t data_recv;
+            size_t data_recv_len;
+    
+            // Read characteristic value.
+            sc = sl_bt_gatt_server_read_attribute_value(gattdb_led_state,
+                                                        0,
+                                                        sizeof(data_recv),
+                                                        &data_recv_len,
+                                                        &data_recv);
+            (void)data_recv_len;
+            app_log_status_error(sc);
+    
+            if (sc != SL_STATUS_OK) {
+              break;
+            }
+    
+            // Toggle LED.
+            if (data_recv == 0x00) {
+              sl_led_turn_off(SL_SIMPLE_LED_INSTANCE(0));
+              app_log_info("LED off.\n");
+            } else if (data_recv == 0x01) {
+              sl_led_turn_on(SL_SIMPLE_LED_INSTANCE(0));
+              app_log_info("LED on.\n");
+            } else {
+              app_log_error("Invalid attribute value: 0x%02x\n", (int)data_recv);
+            }
+          }
+          break;
+    ```
+    
+- Button
+    - https://docs.silabs.com/gecko-platform/3.0/driver/api/group-button
+    - Install Simple Button
+    - **#include** "sl_simple_button_instances.h"
+    - Add flag to indicate when to report button state
+        
+        ```c
+        // Flag to indicate when we need to report the button state
+        static bool report_button_flag = false;
+        ```
+        
+    - Disable button upon bootup
+        
+        ```c
+        // Make sure there will be no button events before the boot event.
+          sl_button_disable(SL_SIMPLE_BUTTON_INSTANCE(0));
+        ```
+        
+    - Enable receiving the event when the button state changes
+        
+        ```c
+        void sl_button_on_change(const sl_button_t *handle)
+        {
+          if (SL_SIMPLE_BUTTON_INSTANCE(0) == handle) {
+            report_button_flag = true;
+          }
+        }
+        ```
+        
+    - Enable button in sl_bt_on_event:
+        
+        ```c
+        sl_button_enable(SL_SIMPLE_BUTTON_INSTANCE(0));
+        
+              // Check the report button state, then update the characteristic and
+              // send notification.
+              sc = update_report_button_characteristic();
+              app_log_status_error(sc);
+        
+              if (sc == SL_STATUS_OK) {
+                sc = send_report_button_notification();
+                app_log_status_error(sc);
+              }
+        ```
+        
+    - Implement sending the notification and also updating the local char value (needed for reads)
+        
+        ```c
+        static sl_status_t update_report_button_characteristic(void);
+        static sl_status_t send_report_button_notification(void);
+        
+        /***************************************************************************//**
+         * Updates the Report Button characteristic.
+         *
+         * Checks the current button state and then writes it into the local GATT table.
+         ******************************************************************************/
+        static sl_status_t update_report_button_characteristic(void)
+        {
+          sl_status_t sc;
+          uint8_t data_send;
+        
+          switch (sl_button_get_state(SL_SIMPLE_BUTTON_INSTANCE(0))) {
+            case SL_SIMPLE_BUTTON_PRESSED:
+              data_send = (uint8_t)SL_SIMPLE_BUTTON_PRESSED;
+              app_log_info("button pressed\n");
+              break;
+        
+            case SL_SIMPLE_BUTTON_RELEASED:
+              data_send = (uint8_t)SL_SIMPLE_BUTTON_RELEASED;
+              app_log_info("button released\n");
+              break;
+        
+            default:
+              // Invalid button state
+              app_log_info("button state unknown\n");
+              return SL_STATUS_FAIL; // Invalid button state
+          }
+        
+          // Write attribute in the local GATT database.
+          sc = sl_bt_gatt_server_write_attribute_value(gattdb_button_state,
+                                                       0,
+                                                       sizeof(data_send),
+                                                       &data_send);
+          if (sc == SL_STATUS_OK) {
+            app_log_info("Attribute written: 0x%02x\n", (int)data_send);
+          }
+        
+          return sc;
+        }
+        
+        /***************************************************************************//**
+         * Sends notification of the Report Button characteristic.
+         *
+         * Reads the current button state from the local GATT database and sends it as a
+         * notification.
+         ******************************************************************************/
+        static sl_status_t send_report_button_notification(void)
+        {
+          sl_status_t sc;
+          uint8_t data_send;
+          size_t data_len;
+        
+          // Read report button characteristic stored in local GATT database.
+          sc = sl_bt_gatt_server_read_attribute_value(gattdb_button_state,
+                                                      0,
+                                                      sizeof(data_send),
+                                                      &data_len,
+                                                      &data_send);
+          if (sc != SL_STATUS_OK) {
+            return sc;
+          }
+        
+          // Send characteristic notification.
+          sc = sl_bt_gatt_server_notify_all(gattdb_button_state,
+                                            sizeof(data_send),
+                                            &data_send);
+          if (sc == SL_STATUS_OK) {
+            app_log_append(" Notification sent: 0x%02x\n", (int)data_send);
+          }
+        
+          return sc;
+        }
+        ```
+        
+    - Handle after bt init successful
+        
+        ```c
+        sl_button_enable(SL_SIMPLE_BUTTON_INSTANCE(0));
+        
+              // Check the report button state, then update the characteristic and
+              // send notification.
+              sc = update_report_button_characteristic();
+              app_log_status_error(sc);
+        
+              if (sc == SL_STATUS_OK) {
+                sc = send_report_button_notification();
+                app_log_status_error(sc);
+              }
+        ```
 
 ## Troubleshooting
 
