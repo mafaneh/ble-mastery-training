@@ -116,11 +116,17 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
     // -------------------------------
     // This event indicates that a new connection was opened.
     case sl_bt_evt_connection_opened_id:
+
+      app_log("Connection Opened\n");
+
       break;
 
     // -------------------------------
     // This event indicates that a connection was closed.
     case sl_bt_evt_connection_closed_id:
+
+      app_log("Connection Terminated with reason 0x%02x\n", (uint8_t)evt->data.evt_connection_closed.reason);
+
       // Generate data for advertising
       sc = sl_bt_legacy_advertiser_generate_data(advertising_set_handle,
                                                  sl_bt_advertiser_general_discoverable);

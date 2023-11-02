@@ -107,6 +107,14 @@ SL_WEAK void app_process_action(void)
     }
 }
 
+void sl_button_on_change(const sl_button_t *handle)
+{
+  if (handle == SL_SIMPLE_BUTTON_INSTANCE(0))
+    {
+        report_button_state = true;
+    }
+}
+
 /**************************************************************************//**
  * Bluetooth stack event handler.
  * This overrides the dummy weak implementation.
