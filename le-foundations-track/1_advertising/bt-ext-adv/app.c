@@ -145,11 +145,11 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
   }
 }
 
-#define TEST_EXT_ELE_LENGTH 200
+#define TEST_EXT_ELE_LENGTH 234
 void demo_setup_ext_adv(uint8_t handle)
 {
   sl_status_t sc;
-  uint8_t amout_bytes = 0;
+  uint8_t amount_bytes = 0;
   uint8_t extended_buf[TEST_EXT_ELE_LENGTH];
   /* https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers - To get your company ID*/
   uint16_t company_id = 0x02FF; // 0x02FF - Silicon Labs' company ID
@@ -164,24 +164,22 @@ void demo_setup_ext_adv(uint8_t handle)
       'A', 'd', 'v', 'C', // Local name
   };
   // Byte amount in advertising data buffer now increased by 9
-  amout_bytes += 9;
-  adv_data[amout_bytes++] = 0x11;// length 17 bytes
-  adv_data[amout_bytes++] = 0x06;//more_128_uuids
+  amount_bytes += 9;
 
   // Prepare manufacturer_specific_data
   memcpy(extended_buf, (uint8_t *)&company_id, 2);
   for (uint8_t i = 2; i < TEST_EXT_ELE_LENGTH; i++) {
-    extended_buf[i] = i;
+    extended_buf[i] = i-1;
   }
 
   // Adding manufacturer_specific_data
-  adv_data[amout_bytes++] = 0xC9;//length TEST_EXT_ELE_LENGTH + 1
-  adv_data[amout_bytes++] = 0xFF;//ad type: manufacturer_specific_data
-  memcpy(adv_data + amout_bytes, (uint8_t *)&extended_buf, TEST_EXT_ELE_LENGTH);
-  amout_bytes += TEST_EXT_ELE_LENGTH;
+  adv_data[amount_bytes++] = TEST_EXT_ELE_LENGTH+1;//length TEST_EXT_ELE_LENGTH + 1
+  adv_data[amount_bytes++] = 0xFF;//ad type: manufacturer_specific_data
+  memcpy(adv_data + amount_bytes, (uint8_t *)&extended_buf, TEST_EXT_ELE_LENGTH);
+  amount_bytes += TEST_EXT_ELE_LENGTH;
 
   // Set advertising data
-  sc = sl_bt_extended_advertiser_set_data(handle, amout_bytes, adv_data);
+  sc = sl_bt_extended_advertiser_set_data(handle, amount_bytes, adv_data);
   app_assert(sc == SL_STATUS_OK,
                       "[E: 0x%04x] Failed to set advertising data\n",
                       (int)sc);
@@ -211,5 +209,5 @@ void demo_setup_start_ext_adv(uint8_t handle)
                   "[E: 0x%04x] Failed to start advertising\n",
                   (int)sc);
   /* Start general advertising and enable connections. */
-  app_log("Start advertising.\r\n");
+  app_log("Start Extended advertising.\r\n");
 }
