@@ -145,41 +145,52 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
   }
 }
 
-#define TEST_EXT_ELE_LENGTH 234
+#define TEST_EXT_ELE_LENGTH 225
 void demo_setup_ext_adv(uint8_t handle)
 {
   sl_status_t sc;
-  uint8_t amount_bytes = 0;
-  uint8_t extended_buf[TEST_EXT_ELE_LENGTH];
+
+  uint8_t i, bytes_count = 0;
+
   /* https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers - To get your company ID*/
-  uint16_t company_id = 0x02FF; // 0x02FF - Silicon Labs' company ID
+  uint16_t company_id = 0x08D3; // 0x08D3 - Novel Bits' company ID
 
   // Initialize advertising data with Flag and Local name
   uint8_t adv_data[MAX_EXTENDED_ADV_LENGTH] = {
       0x02, // Length of flag
       0x01, // Type flag
       0x06, // Flag data
-      0x05, // Length of Local name
-      0x09, // Type local name
-      'A', 'd', 'v', 'C', // Local name
+      0x0B, // Length of Complete Local name
+      0x09, // Type Complete local name
+      'N', 'o', 'v', 'e', 'l', ' ', 'B', 'i', 't', 's' // Local name
   };
-  // Byte amount in advertising data buffer now increased by 9
-  amount_bytes += 9;
 
-  // Prepare manufacturer_specific_data
-  memcpy(extended_buf, (uint8_t *)&company_id, 2);
-  for (uint8_t i = 2; i < TEST_EXT_ELE_LENGTH; i++) {
-    extended_buf[i] = i-1;
-  }
+  // Byte amount in advertising data buffer now increased by 15 (Flags + Local Name)
+  bytes_count += 15;
 
   // Adding manufacturer_specific_data
-  adv_data[amount_bytes++] = TEST_EXT_ELE_LENGTH+1;//length TEST_EXT_ELE_LENGTH + 1
-  adv_data[amount_bytes++] = 0xFF;//ad type: manufacturer_specific_data
-  memcpy(adv_data + amount_bytes, (uint8_t *)&extended_buf, TEST_EXT_ELE_LENGTH);
-  amount_bytes += TEST_EXT_ELE_LENGTH;
+
+  // Length: Type (1 byte) + Company ID (2 bytes) + Data (TEST_EXT_ELE_LENGTH)
+  adv_data[bytes_count] = TEST_EXT_ELE_LENGTH + 1 + 2;
+  bytes_count++;
+
+  // Manufacturer Specific Data
+  adv_data[bytes_count] = 0xFF;//ad type: manufacturer_specific_data
+  bytes_count++;
+
+
+  // Company ID
+  memcpy(adv_data+bytes_count, (uint8_t *)&company_id, 2);
+  bytes_count += 2;
+
+  // Add manufacturer_specific_data
+  for (i= 0; i < TEST_EXT_ELE_LENGTH; i++) {
+    adv_data[bytes_count + i] = i;
+  }
+  bytes_count += TEST_EXT_ELE_LENGTH;
 
   // Set advertising data
-  sc = sl_bt_extended_advertiser_set_data(handle, amount_bytes, adv_data);
+  sc = sl_bt_extended_advertiser_set_data(handle, bytes_count, adv_data);
   app_assert(sc == SL_STATUS_OK,
                       "[E: 0x%04x] Failed to set advertising data\n",
                       (int)sc);
@@ -209,5 +220,5 @@ void demo_setup_start_ext_adv(uint8_t handle)
                   "[E: 0x%04x] Failed to start advertising\n",
                   (int)sc);
   /* Start general advertising and enable connections. */
-  app_log("Start Extended advertising.\r\n");
+  app_log("Start Extended Advertising.\r\n");
 }
