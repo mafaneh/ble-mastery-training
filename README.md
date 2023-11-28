@@ -24,3 +24,5 @@ Advanced training track focused on the latest in the Bluetooth specification and
 
 ### 4. Ellisys Bluetooth Mastery Track
 Focused on using Ellisys' Bluetooth Protocol Analyzers (Sniffers) to understand and debug Bluetooth LE communication. 
+# More Information
+Learn more about the training program and request information here: https://novelbits.io/bluetooth-low-energy-mastery-training/
