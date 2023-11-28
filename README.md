@@ -9,12 +9,12 @@ Focused on the foundation and basics of Bluetooth Low Energy, including:
 - Introduction to Bluetooth Low Energy
 - Bluetooth LE vs. Classic (BR/EDR)
 - Bluetooth LE Architecture and Stack
-- Advertising and Scanning: Legacy Advertising, Extended Advertising, Periodic Advertising, and Periodic Advertising w Responses (PAwR)
+- Advertising and Scanning
 - Connectionless vs. Connection-based communication
 - Connections between LE devices (Generic Access Profile – GAP)
 - Data Transfer between LE devices (Attribute Protocol – ATT, Generic Attribute Profile – GATT)
 - Privacy and Security in Bluetooth LE
-- Advanced Topics
+- Advanced Topics: Extended Advertising, Periodic Advertising, and Periodic Advertising w Responses (PAwR)
 
 ### 2. LE Audio Kickstarter Track
 Focused on the exciting new standard for Bluetooth Audio: LE Audio. This includes both connected and broadcast audio (Auracast™) standards.
