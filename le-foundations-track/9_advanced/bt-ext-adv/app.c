@@ -145,7 +145,7 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
   }
 }
 
-#define TEST_EXT_ELE_LENGTH 225
+#define TEST_EXT_ELE_LENGTH 226
 void demo_setup_ext_adv(uint8_t handle)
 {
   sl_status_t sc;
