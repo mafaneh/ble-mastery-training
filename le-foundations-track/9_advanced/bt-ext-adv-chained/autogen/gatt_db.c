@@ -24,21 +24,11 @@ GATT_DATA(const uint16_t gattdb_uuidtable_16_map[]) =
 
 GATT_DATA(const uint8_t gattdb_uuidtable_128_map[]) =
 {
-  0x30, 0xb5, 0x21, 0x04, 0x68, 0xa8, 0xf6, 0xa3, 0xc7, 0x44, 0x46, 0xe9, 0x89, 0x01, 0xb5, 0x93, 
   0x63, 0x60, 0x32, 0xe0, 0x37, 0x5e, 0xa4, 0x88, 0x53, 0x4e, 0x6d, 0xfb, 0x64, 0x35, 0xbf, 0xf7, 
-};
-GATT_DATA(const sli_bt_gattdb_value_t gattdb_attribute_field_21) = {
-  .len = 16,
-  .data = { 0xf0, 0x19, 0x21, 0xb4, 0x47, 0x8f, 0xa4, 0xbf, 0xa1, 0x4f, 0x63, 0xfd, 0xee, 0xd6, 0x14, 0x1d, }
-};
-GATT_DATA(sli_bt_gattdb_attribute_chrvalue_t gattdb_attribute_field_20) = {
-  .properties = 0x02,
-  .max_len = 1,
-  .data = { 0x00, },
 };
 GATT_DATA(const sli_bt_gattdb_value_t gattdb_attribute_field_18) = {
   .len = 16,
-  .data = { 0x81, 0xc2, 0x00, 0x2d, 0x31, 0xf4, 0xb0, 0xbf, 0x2b, 0x42, 0x49, 0x68, 0xc7, 0x25, 0x71, 0x41, }
+  .data = { 0xf0, 0x19, 0x21, 0xb4, 0x47, 0x8f, 0xa4, 0xbf, 0xa1, 0x4f, 0x63, 0xfd, 0xee, 0xd6, 0x14, 0x1d, }
 };
 GATT_DATA(sli_bt_gattdb_attribute_chrvalue_t gattdb_attribute_field_17) = {
   .properties = 0x02,
@@ -59,8 +49,8 @@ GATT_DATA(const sli_bt_gattdb_value_t gattdb_attribute_field_12) = {
 };
 GATT_DATA(sli_bt_gattdb_attribute_chrvalue_t gattdb_attribute_field_10) = {
   .properties = 0x0a,
-  .max_len = 21,
-  .data = { 0x43, 0x68, 0x61, 0x69, 0x6e, 0x65, 0x64, 0x20, 0x41, 0x64, 0x76, 0x65, 0x72, 0x74, 0x69, 0x73, 0x65, 0x6d, 0x65, 0x6e, 0x74, },
+  .max_len = 14,
+  .data = { 0x53, 0x69, 0x6c, 0x61, 0x62, 0x73, 0x20, 0x45, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, },
 };
 GATT_DATA(const sli_bt_gattdb_value_t gattdb_attribute_field_8) = {
   .len = 2,
@@ -105,24 +95,21 @@ GATT_DATA(const sli_bt_gattdb_attribute_t gattdb_attributes_map[]) = {
   { .handle = 0x10, .uuid = 0x0005, .permissions = 0x801, .caps = 0xffff, .state = 0x00, .datatype = 0x00, .constdata = &gattdb_attribute_field_15 },
   { .handle = 0x11, .uuid = 0x0002, .permissions = 0x801, .caps = 0xffff, .state = 0x00, .datatype = 0x05, .characteristic = { .properties = 0x02, .char_uuid = 0x0006 } },
   { .handle = 0x12, .uuid = 0x0006, .permissions = 0x801, .caps = 0xffff, .state = 0x00, .datatype = 0x01, .dynamicdata = &gattdb_attribute_field_17 },
-  { .handle = 0x13, .uuid = 0x0000, .permissions = 0x8801, .caps = 0xffff, .state = 0x00, .datatype = 0x00, .constdata = &gattdb_attribute_field_18 },
-  { .handle = 0x14, .uuid = 0x0002, .permissions = 0x801, .caps = 0xffff, .state = 0x00, .datatype = 0x05, .characteristic = { .properties = 0x02, .char_uuid = 0x8000 } },
-  { .handle = 0x15, .uuid = 0x8000, .permissions = 0x801, .caps = 0xffff, .state = 0x00, .datatype = 0x01, .dynamicdata = &gattdb_attribute_field_20 },
-  { .handle = 0x16, .uuid = 0x0000, .permissions = 0x801, .caps = 0xffff, .state = 0x00, .datatype = 0x00, .constdata = &gattdb_attribute_field_21 },
-  { .handle = 0x17, .uuid = 0x0002, .permissions = 0x801, .caps = 0xffff, .state = 0x00, .datatype = 0x05, .characteristic = { .properties = 0x08, .char_uuid = 0x8001 } },
-  { .handle = 0x18, .uuid = 0x8001, .permissions = 0x802, .caps = 0xffff, .state = 0x00, .datatype = 0x07, .dynamicdata = NULL },
+  { .handle = 0x13, .uuid = 0x0000, .permissions = 0x801, .caps = 0xffff, .state = 0x00, .datatype = 0x00, .constdata = &gattdb_attribute_field_18 },
+  { .handle = 0x14, .uuid = 0x0002, .permissions = 0x801, .caps = 0xffff, .state = 0x00, .datatype = 0x05, .characteristic = { .properties = 0x08, .char_uuid = 0x8000 } },
+  { .handle = 0x15, .uuid = 0x8000, .permissions = 0x802, .caps = 0xffff, .state = 0x00, .datatype = 0x07, .dynamicdata = NULL },
 };
 
 GATT_HEADER(const sli_bt_gattdb_t gattdb) = {
   .attributes = gattdb_attributes_map,
-  .attribute_table_size = 24,
-  .attribute_num = 24,
+  .attribute_table_size = 21,
+  .attribute_num = 21,
   .uuid16 = gattdb_uuidtable_16_map,
   .uuid16_table_size = 11,
   .uuid16_num = 11,
   .uuid128 = gattdb_uuidtable_128_map,
-  .uuid128_table_size = 2,
-  .uuid128_num = 2,
+  .uuid128_table_size = 1,
+  .uuid128_num = 1,
   .num_ccfg = 1,
   .caps_mask = 0xffff,
   .enabled_caps = 0xffff,

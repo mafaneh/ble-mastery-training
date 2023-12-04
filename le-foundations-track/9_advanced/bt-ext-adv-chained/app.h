@@ -18,6 +18,9 @@
 #ifndef APP_H
 #define APP_H
 
+#include "sl_bt_api.h"
+#include "app_log.h"
+
 /**************************************************************************//**
  * Application Init.
  *****************************************************************************/
@@ -27,5 +30,16 @@ void app_init(void);
  * Application Process Action.
  *****************************************************************************/
 void app_process_action(void);
+
+
+#define MAX_ADV_DATA_LENGTH 31
+#define MAX_EXTENDED_ADV_LENGTH 253 /* Current SDK only support 253 bytes */
+
+/**
+ * @brief demo_setup_adv - this function demonstrates
+ * 1> set the advertising data with 3 elements - flag, complete local name and more 128 uuids,
+ * 2> set the scan response with one element - Manufacturer specific data.
+ */
+void demo_setup_adv(uint8_t handle);
 
 #endif // APP_H

@@ -777,10 +777,10 @@
       </folder>
     </folder>
   </folder>
-  <file name="app.c" linked="false" uri="file:/Applications/Simplicity%20Studio.app/Contents/Eclipse/developer/repos/bluetooth_stack_features/advertising/chained_advertisement/src/advertiser/app.c"/>
-  <file name="main.c" linked="false" uri="file:/Applications/Simplicity%20Studio.app/Contents/Eclipse/developer/repos/bluetooth_stack_features/advertising/chained_advertisement/src/advertiser/main.c"/>
-  <file name="app.h" linked="false" uri="file:/Applications/Simplicity%20Studio.app/Contents/Eclipse/developer/repos/bluetooth_stack_features/advertising/chained_advertisement/inc/advertiser/app.h"/>
-  <file name="readme.md" linked="false" uri="file:/Applications/Simplicity%20Studio.app/Contents/Eclipse/developer/repos/bluetooth_stack_features/advertising/chained_advertisement/SimplicityStudio/readme.md"/>
+  <file name="app.c" linked="false" uri="file:/Applications/Simplicity%20Studio.app/Contents/Eclipse/developer/repos/bluetooth_stack_features/advertising/extended_advertising/src/advertiser/app.c"/>
+  <file name="main.c" linked="false" uri="file:/Applications/Simplicity%20Studio.app/Contents/Eclipse/developer/repos/bluetooth_stack_features/advertising/extended_advertising/src/advertiser/main.c"/>
+  <file name="app.h" linked="false" uri="file:/Applications/Simplicity%20Studio.app/Contents/Eclipse/developer/repos/bluetooth_stack_features/advertising/extended_advertising/inc/advertiser/app.h"/>
+  <file name="readme.md" linked="false" uri="file:/Applications/Simplicity%20Studio.app/Contents/Eclipse/developer/repos/bluetooth_stack_features/advertising/extended_advertising/SimplicityStudio/readme.md"/>
   <includePath uri="studio:/project/"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/platform/Device/SiliconLabs/EFR32MG24/Include"/>
   <includePath uri="studio:/project/gecko_sdk_4.3.2/app/common/util/app_assert"/>

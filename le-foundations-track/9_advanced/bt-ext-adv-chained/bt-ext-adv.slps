@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
 <model:MDescriptors xmlns:model="http://www.silabs.com/ss/Studio.ecore">
-  <descriptors name="bt-chain-adv">
+  <descriptors name="bt-ext-adv">
     <properties key="projectCommon.sdkId" value="com.silabs.sdk.stack.super:4.3.2._-520825742"/>
     <properties key="universalConfig.generationDirectory" value=""/>
-    <properties key="universalConfig.relativeWorkspacePath" value="../bt-chain-adv.slcw"/>
+    <properties key="universalConfig.relativeWorkspacePath" value="../bt-ext-adv.slcw"/>
     <properties key="universalConfig.toolchainCompatibility" value="iar gcc"/>
     <properties key="projectCommon.boardIds" value="brd2601b:0.0.0.A01"/>
     <properties key="projectCommon.kitId" value=""/>

@@ -25,7 +25,6 @@
     <file name="sl_device_init_lfxo_config.h" generated="true" linked="false"/>
     <file name="dmadrv_config.h" generated="true" linked="false"/>
     <file name="sl_rail_util_pti_config.h" generated="true" linked="false"/>
-    <file name="sl_bt_periodic_advertiser_config.h" generated="true" linked="false"/>
     <file name="app_properties_config.h" generated="true" linked="false"/>
     <file name="sl_bluetooth_advertiser_config.h" generated="true" linked="false"/>
     <file name="sl_iostream_usart_vcom_config.h" generated="true" linked="false"/>
