@@ -65,6 +65,25 @@ static const adv_data_t adv_data =
 
     };
 
+//typedef struct
+//{
+//    uint8_t manuf_spec_data_len;
+//    uint8_t manuf_spec_data_type;
+//    uint8_t manuf_spec_data_company_id[2];
+//    uint8_t manuf_spec_data_value[27];
+//
+//} scan_response_data_t;
+//
+//static const scan_response_data_t scan_rsp_data =
+//    {
+//        .manuf_spec_data_len = 30,
+//        .manuf_spec_data_type = 0xFF,
+//        .manuf_spec_data_company_id = { 0xD3, 0x08},
+//        .manuf_spec_data_value = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E,
+//                                   0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B
+//        }
+//    };
+
 /**************************************************************************//**
  * Application Init.
  *****************************************************************************/
@@ -103,6 +122,7 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
     // This event indicates the device has started and the radio is ready.
     // Do not call any stack command before receiving this boot event!
     case sl_bt_evt_system_boot_id:
+
       // Create an advertising set.
       sc = sl_bt_advertiser_create_set(&advertising_set_handle);
       app_assert_status(sc);
@@ -113,6 +133,12 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
                                                   (uint8_t *)&adv_data);
       app_assert_status(sc);
 
+//      sc = sl_bt_legacy_advertiser_set_data(advertising_set_handle,
+//                                            sl_bt_advertiser_scan_response_packet,
+//                                                  sizeof(scan_rsp_data),
+//                                                  (uint8_t *)&scan_rsp_data);
+//      app_assert_status(sc);
+
       // Set advertising interval to 100ms.
       sc = sl_bt_advertiser_set_timing(
         advertising_set_handle,
@@ -121,10 +147,15 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
         0,   // adv. duration
         0);  // max. num. adv. events
       app_assert_status(sc);
-      // Start advertising and enable connections.
+
+      // Start advertising
       sc = sl_bt_legacy_advertiser_start(advertising_set_handle,
                                          sl_bt_advertiser_non_connectable);
       app_assert_status(sc);
+
+//      sc = sl_bt_legacy_advertiser_start(advertising_set_handle,
+//                                         sl_bt_advertiser_scannable_non_connectable);
+//      app_assert_status(sc);
       break;
 
     ///////////////////////////////////////////////////////////////////////////
