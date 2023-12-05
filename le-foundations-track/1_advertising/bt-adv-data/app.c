@@ -36,6 +36,7 @@
 static uint8_t advertising_set_handle = 0xff;
 
 #define DEVICE_NAME_VALUE "Novel Bits"
+#define DEVICE_NAME_LENGTH (sizeof(DEVICE_NAME_VALUE)-1) // includes the Null terminator
 
 typedef struct
 {
@@ -47,23 +48,23 @@ typedef struct
   // Device Name (Complete Local Name)
   uint8_t device_name_len;
   uint8_t device_name_type;
-  uint8_t device_name_value[10];
+  uint8_t device_name_value[DEVICE_NAME_LENGTH];
 
 } adv_data_t;
 
 static const adv_data_t adv_data =
-    {
-        // Flags
-        .flags_len = 0x02,
-        .flags_type = 0x01,
-        .flags_value = 0x06,
+{
+    // Flags
+    .flags_len = 0x02,
+    .flags_type = 0x01,
+    .flags_value = 0x06,
 
-        // Device Name
-        .device_name_len = 0x0B,
-        .device_name_type = 0x09,
-        .device_name_value = DEVICE_NAME_VALUE
+    // Device Name
+    .device_name_len = DEVICE_NAME_LENGTH+1, // adding 1 to include the type field
+    .device_name_type = 0x09,
+    .device_name_value = DEVICE_NAME_VALUE
 
-    };
+};
 
 //typedef struct
 //{
@@ -75,14 +76,14 @@ static const adv_data_t adv_data =
 //} scan_response_data_t;
 //
 //static const scan_response_data_t scan_rsp_data =
-//    {
-//        .manuf_spec_data_len = 30,
-//        .manuf_spec_data_type = 0xFF,
-//        .manuf_spec_data_company_id = { 0xD3, 0x08},
-//        .manuf_spec_data_value = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E,
-//                                   0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B
-//        }
-//    };
+//{
+//    .manuf_spec_data_len = 30,
+//    .manuf_spec_data_type = 0xFF,
+//    .manuf_spec_data_company_id = { 0xD3, 0x08},
+//    .manuf_spec_data_value = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E,
+//                               0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B
+//    }
+//};
 
 /**************************************************************************//**
  * Application Init.
