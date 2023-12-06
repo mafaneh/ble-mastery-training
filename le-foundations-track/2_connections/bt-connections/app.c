@@ -35,6 +35,8 @@
 // The advertising set handle allocated from Bluetooth stack.
 static uint8_t advertising_set_handle = 0xff;
 
+#define EXTENDED_ADV_ENABLE
+
 /**************************************************************************//**
  * Application Init.
  *****************************************************************************/
@@ -95,9 +97,19 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
       app_assert_status(sc);
 
       // Generate data for advertising
+
+#ifndef EXTENDED_ADV_ENABLE
+      // 1. Legacy Advertising
       sc = sl_bt_legacy_advertiser_generate_data(advertising_set_handle,
                                                  sl_bt_advertiser_general_discoverable);
       app_assert_status(sc);
+#else
+      // 2. Extended Advertising
+      sc = sl_bt_extended_advertiser_generate_data(advertising_set_handle,
+                                                   sl_bt_advertiser_general_discoverable);
+      app_assert_status(sc);
+
+#endif
 
       // Set advertising interval to 100ms.
       sc = sl_bt_advertiser_set_timing(
@@ -107,10 +119,21 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
         0,   // adv. duration
         0);  // max. num. adv. events
       app_assert_status(sc);
+
       // Start advertising and enable connections.
+
+#ifndef EXTENDED_ADV_ENABLE
+      // 1. Legacy Advertising
       sc = sl_bt_legacy_advertiser_start(advertising_set_handle,
                                          sl_bt_advertiser_connectable_scannable);
       app_assert_status(sc);
+#else
+      // 2. Extended Advertising
+      sc = sl_bt_extended_advertiser_start(advertising_set_handle,
+                                           sl_bt_extended_advertiser_connectable,
+                                           0);
+      app_assert_status(sc);
+#endif
       break;
 
     // -------------------------------
@@ -128,6 +151,9 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
       app_log("Connection Terminated with reason 0x%02x\n", (uint8_t)evt->data.evt_connection_closed.reason);
 
       // Generate data for advertising
+
+#ifndef EXTENDED_ADV_ENABLE
+      // Legacy Advertising
       sc = sl_bt_legacy_advertiser_generate_data(advertising_set_handle,
                                                  sl_bt_advertiser_general_discoverable);
       app_assert_status(sc);
@@ -136,6 +162,18 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
       sc = sl_bt_legacy_advertiser_start(advertising_set_handle,
                                          sl_bt_advertiser_connectable_scannable);
       app_assert_status(sc);
+#else
+      // Extended Advertising
+      sc = sl_bt_extended_advertiser_generate_data(advertising_set_handle,
+                                                   sl_bt_advertiser_general_discoverable);
+      app_assert_status(sc);
+
+      // Restart advertising after client has disconnected.
+      sc = sl_bt_extended_advertiser_start(advertising_set_handle,
+                                           sl_bt_extended_advertiser_connectable,
+                                           0);
+      app_assert_status(sc);
+#endif
       break;
 
     ///////////////////////////////////////////////////////////////////////////

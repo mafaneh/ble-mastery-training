@@ -116,24 +116,6 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
     case sl_bt_evt_connection_opened_id:
       break;
 
-    // -------------------------------
-    // This event indicates that a connection was closed.
-    case sl_bt_evt_connection_closed_id:
-      // Restart advertising after client has disconnected.
-      sc = sl_bt_extended_advertiser_generate_data(advertising_set_handle,
-                                                   advertiser_general_discoverable);
-      app_assert(sc == SL_STATUS_OK,
-                    "[E: 0x%04x] Failed to generate data\n",
-                    (int)sc);
-      sc = sl_bt_extended_advertiser_start(
-        advertising_set_handle,
-        sl_bt_extended_advertiser_scannable,
-        0);
-      app_assert(sc == SL_STATUS_OK,
-                    "[E: 0x%04x] Failed to start advertising\n",
-                    (int)sc);
-      break;
-
     ///////////////////////////////////////////////////////////////////////////
     // Add additional event handlers here as your application requires!      //
     ///////////////////////////////////////////////////////////////////////////
@@ -219,6 +201,6 @@ void demo_setup_start_ext_adv(uint8_t handle)
   app_assert(sc == SL_STATUS_OK,
                   "[E: 0x%04x] Failed to start advertising\n",
                   (int)sc);
-  /* Start general advertising and enable connections. */
+
   app_log("Start Extended Advertising.\r\n");
 }
