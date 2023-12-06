@@ -26,6 +26,26 @@
 #define SIGNAL_REFRESH_DATA   1
 #define TICKS_PER_SECOND      32768
 
+#define MAX_EXTENDED_ADV_LENGTH 253 /* Current SDK only support 253 bytes */
+#define MANUF_SPECIFIC_DATA_LENGTH (MAX_EXTENDED_ADV_LENGTH-4)
+
+// Mnaufacturer Specific Data (Periodic Adv)
+typedef struct
+{
+  uint8_t length;
+  uint8_t type;
+  uint8_t company_id[2];
+  uint8_t data[MANUF_SPECIFIC_DATA_LENGTH];
+
+} periodic_adv_data_t;
+
+periodic_adv_data_t periodic_adv_data =
+    {
+        .length = MAX_EXTENDED_ADV_LENGTH-1, // Length = Max - 1 byte (for length field)
+        .type = 0xFF,                        // Manufacturer Specific Data Type
+        .company_id = {0xD3, 0x08}           // 0x08D3 - Novel Bits' company ID (Little-Endian formatted)
+    };
+
 // The advertising set handle allocated from Bluetooth stack.
 static uint8_t advertising_set_handle = 0xff;
 
@@ -60,6 +80,7 @@ SL_WEAK void app_process_action(void)
  *
  * @param[in] evt Event coming from the Bluetooth stack.
  *****************************************************************************/
+#define TEST_EXT_ELE_LENGTH 226
 void sl_bt_on_event(sl_bt_msg_t *evt)
 {
   sl_status_t sc;
@@ -67,7 +88,9 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
   uint8_t address_type;
   uint8_t system_id[8];
 
-  static uint8_t periodic_adv_data[191];
+  // Set the advertising data
+  uint8_t i;
+
   int16_t result;
 
   switch (SL_BT_MSG_ID(evt->header)) {
@@ -137,8 +160,12 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
                                            SL_BT_PERIODIC_ADVERTISER_AUTO_START_EXTENDED_ADVERTISING);
       app_assert_status(sc);
 
-      // Set the advertising data
-      sc = sl_bt_periodic_advertiser_set_data(advertising_set_handle, sizeof(periodic_adv_data), periodic_adv_data);
+      // Add manufacturer_specific_data for periodic advertising
+      for (i= 0; i < MANUF_SPECIFIC_DATA_LENGTH; i++) {
+          periodic_adv_data.data[i] = i;
+      }
+
+      sc = sl_bt_periodic_advertiser_set_data(advertising_set_handle, sizeof(periodic_adv_data), (uint8_t *)&periodic_adv_data);
 
       app_assert_status(sc);
 
@@ -156,15 +183,13 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
     case sl_bt_evt_system_external_signal_id:
       if(evt->data.evt_system_external_signal.extsignals == SIGNAL_REFRESH_DATA)
       {
-        app_log_info("\r\n");
-        for (int i = 0; i < 190; i++) {
-            periodic_adv_data[i] = rand()%9;
-            app_log_info(" %X", periodic_adv_data[i]);
-        }
-        app_log_info("\r\n");
+          // Add manufacturer_specific_data for periodic advertising
+          for (i= 0; i < MANUF_SPECIFIC_DATA_LENGTH; i++) {
+              periodic_adv_data.data[i] = rand()%256;
+          }
 
-        sc = sl_bt_periodic_advertiser_set_data(advertising_set_handle, sizeof(periodic_adv_data), periodic_adv_data);
-        app_assert_status(sc);
+          sc = sl_bt_periodic_advertiser_set_data(advertising_set_handle, sizeof(periodic_adv_data), (uint8_t *)&periodic_adv_data);
+          app_assert_status(sc);
       }
       break;
     ///////////////////////////////////////////////////////////////////////////
