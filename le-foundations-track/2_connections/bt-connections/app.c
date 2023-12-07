@@ -128,6 +128,9 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
                                          sl_bt_advertiser_connectable_scannable);
       app_assert_status(sc);
 #else
+
+      sl_bt_extended_advertiser_set_phy(advertising_set_handle, sl_bt_gap_phy_1m, sl_bt_gap_phy_2m);
+
       // 2. Extended Advertising
       sc = sl_bt_extended_advertiser_start(advertising_set_handle,
                                            sl_bt_extended_advertiser_connectable,

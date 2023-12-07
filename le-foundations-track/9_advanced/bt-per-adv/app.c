@@ -26,10 +26,10 @@
 #define SIGNAL_REFRESH_DATA   1
 #define TICKS_PER_SECOND      32768
 
-#define MAX_EXTENDED_ADV_LENGTH 253 /* Current SDK only support 253 bytes */
+#define MAX_EXTENDED_ADV_LENGTH 253 /* Current SDK only supports 253 bytes */
 #define MANUF_SPECIFIC_DATA_LENGTH (MAX_EXTENDED_ADV_LENGTH-4)
 
-// Mnaufacturer Specific Data (Periodic Adv)
+// Manufacturer Specific Data (Periodic Adv)
 typedef struct
 {
   uint8_t length;
@@ -40,11 +40,11 @@ typedef struct
 } periodic_adv_data_t;
 
 periodic_adv_data_t periodic_adv_data =
-    {
-        .length = MAX_EXTENDED_ADV_LENGTH-1, // Length = Max - 1 byte (for length field)
-        .type = 0xFF,                        // Manufacturer Specific Data Type
-        .company_id = {0xD3, 0x08}           // 0x08D3 - Novel Bits' company ID (Little-Endian formatted)
-    };
+{
+    .length = MAX_EXTENDED_ADV_LENGTH-1, // Length = Max - 1 byte (for length field)
+    .type = 0xFF,                        // Manufacturer Specific Data Type
+    .company_id = {0xD3, 0x08}           // 0x08D3 - Novel Bits' company ID (Little-Endian formatted)
+};
 
 // The advertising set handle allocated from Bluetooth stack.
 static uint8_t advertising_set_handle = 0xff;
@@ -80,7 +80,6 @@ SL_WEAK void app_process_action(void)
  *
  * @param[in] evt Event coming from the Bluetooth stack.
  *****************************************************************************/
-#define TEST_EXT_ELE_LENGTH 226
 void sl_bt_on_event(sl_bt_msg_t *evt)
 {
   sl_status_t sc;

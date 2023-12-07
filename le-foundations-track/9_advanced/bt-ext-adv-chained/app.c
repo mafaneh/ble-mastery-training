@@ -239,6 +239,11 @@ void demo_setup_start_ext_adv(uint8_t handle)
 
   demo_setup_ext_adv(handle);
 
+  sc = sl_bt_extended_advertiser_set_phy(handle, sl_bt_gap_phy_1m, sl_bt_gap_phy_coded);
+  app_assert(sc == SL_STATUS_OK,
+                    "[E: 0x%04x] Failed to set advertising PHYs\n",
+                    (int)sc);
+
   sc = sl_bt_extended_advertiser_start(
       handle,
       sl_bt_extended_advertiser_non_connectable,
