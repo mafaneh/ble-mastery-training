@@ -124,16 +124,23 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
     // Do not call any stack command before receiving this boot event!
     case sl_bt_evt_system_boot_id:
 
+      app_log("Starting Advertising Data Example\r\n");
+
       // Create an advertising set.
       sc = sl_bt_advertiser_create_set(&advertising_set_handle);
       app_assert_status(sc);
 
+      // Standard Advertising Data
+      app_log("Setting Standard Advertising Data\r\n");
       sc = sl_bt_legacy_advertiser_set_data(advertising_set_handle,
                                                   sl_bt_advertiser_advertising_data_packet,
                                                   sizeof(adv_data),
                                                   (uint8_t *)&adv_data);
       app_assert_status(sc);
 
+
+      // Scan Response Data
+//      app_log("Setting Scan Response Data\r\n");
 //      sc = sl_bt_legacy_advertiser_set_data(advertising_set_handle,
 //                                            sl_bt_advertiser_scan_response_packet,
 //                                                  sizeof(scan_rsp_data),
