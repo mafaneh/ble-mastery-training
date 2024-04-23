@@ -1,0 +1,82 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: bluetooth_pawr_thermometer_sensor
+label: bluetooth_pawr_thermometer_sensor
+description: |
+  This project implements a PAwR-based Advertiser example.
+category: Bluetooth Examples
+filter:
+- name: Device Type
+  value: [SoC]
+- name: Project Difficulty
+  value: [Beginner]
+- name: Wireless Technology
+  value: [Bluetooth]
+package: Bluetooth
+quality: experimental
+readme:
+- {path: README.md}
+source:
+- {path: main.c}
+- {path: app.c}
+include:
+- path: ''
+  file_list:
+  - {path: app.h}
+sdk: {id: gecko_sdk, version: 4.3.2}
+toolchain_settings: []
+component:
+- {id: EFR32MG22C224F512IM40}
+- {id: app_assert}
+- {id: app_button_press}
+- {id: app_log}
+- {id: bluetooth_feature_connection}
+- {id: bluetooth_feature_extended_advertiser}
+- {id: bluetooth_feature_gatt}
+- {id: bluetooth_feature_gatt_server}
+- {id: bluetooth_feature_legacy_advertiser}
+- {id: bluetooth_feature_legacy_scanner}
+- {id: bluetooth_feature_pawr_advertiser}
+- {id: bluetooth_feature_sm}
+- {id: bluetooth_feature_system}
+- {id: bluetooth_stack}
+- {id: brd4002a}
+- {id: brd4182a_b04}
+- {id: bt_post_build}
+- {id: component_catalog}
+- {id: dmd_memlcd}
+- {id: gatt_configuration}
+- {id: gatt_service_device_information}
+- {id: glib}
+- instance: [vcom]
+  id: iostream_usart
+- {id: ls013b7dh03}
+- {id: memlcd_usart}
+- {id: mpu}
+- instance: [btn0, btn1]
+  id: simple_button
+- {id: tempdrv}
+other_file:
+- {path: images/overview.png}
+- {path: images/create_project.png}
+- {path: images/pawr_config.png}
+- {path: images/external_repo.png}
+- {path: images/sensor_init.png}
+- {path: images/sensor_runtime.png}
+- {path: images/synchronization.png}
+- {path: images/client_synchronization.png}
+- {path: images/client_runtime.png}
+- {path: images/sensor_power.png}
+- {path: images/client_power.png}
+- {path: images/test.gif}
+- {path: images/pawr_sensor_adv.png}
+configuration:
+- {name: SL_BOARD_ENABLE_VCOM, value: '1'}
+- {name: SL_BT_CONFIG_MAX_PAWR_ADVERTISERS, value: '1'}
+- {name: SL_STACK_SIZE, value: '2752'}
+- {name: SL_HEAP_SIZE, value: '9200'}
+- {name: SL_PSA_KEY_USER_SLOT_COUNT, value: '0'}
+ui_hints:
+  highlight:
+  - {path: README.md, focus: true}
+  - {path: config/btconf/gatt_configuration.btconf}
+

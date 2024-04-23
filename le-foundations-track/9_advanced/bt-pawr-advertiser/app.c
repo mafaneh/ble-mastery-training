@@ -183,14 +183,6 @@ void memlcd_app_update_led_status(void)
                           5,
                           true);
 
-    GLIB_drawStringOnLine(&glibContext,
-                          led_status_string,
-                          currentLine++,
-                          GLIB_ALIGN_LEFT,
-                          5,
-                          5,
-                          true);
-
     DMD_updateDisplay();
 }
 
