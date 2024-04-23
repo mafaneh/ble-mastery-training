@@ -35,7 +35,7 @@
 // The advertising set handle allocated from Bluetooth stack.
 static uint8_t advertising_set_handle = 0xff;
 
-#define EXTENDED_ADV_ENABLE
+//#define EXTENDED_ADV_ENABLE
 
 /**************************************************************************//**
  * Application Init.
