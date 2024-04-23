@@ -144,12 +144,12 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
 
       // Start general advertising
       sc = sl_bt_extended_advertiser_generate_data(advertising_set_handle,
-                                                 advertiser_general_discoverable);
+                                                   sl_bt_advertiser_general_discoverable);
 
       app_assert_status(sc);
 
       sc = sl_bt_extended_advertiser_start(advertising_set_handle,
-                                           advertiser_non_connectable,
+                                           sl_bt_extended_advertiser_non_connectable,
                                            SL_BT_EXTENDED_ADVERTISER_INCLUDE_TX_POWER );
 
       app_assert_status(sc);
