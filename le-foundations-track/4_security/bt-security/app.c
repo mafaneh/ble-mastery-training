@@ -46,6 +46,7 @@
 static uint8_t advertising_set_handle = 0xff;
 
 static bool report_button_state = false;
+static uint8_t ble_bonding_handle = 0xFF;
 
 /**************************************************************************//**
  * Application Init.
@@ -200,6 +201,8 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
     // This event indicates that a new connection was opened.
     case sl_bt_evt_connection_opened_id:
       app_log("Connected!\n");
+
+      ble_bonding_handle = evt->data.evt_connection_opened.bonding;
       break;
 
     // -------------------------------
@@ -230,14 +233,28 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
     // Bonding
     case sl_bt_evt_sm_bonded_id:
       app_log_info("bonded!\n");
+
+
       break;
 
     // Failed bonding
     case sl_bt_evt_sm_bonding_failed_id:
       app_log_info("Bonding failed, reason 0x%2X\r\n",
                        evt->data.evt_sm_bonding_failed.reason);
+
+      //app_log_info("", evt->data.evt_sm_bonding_failed.connection);
+
       sc = sl_bt_connection_close(evt->data.evt_sm_bonding_failed.connection);
       app_assert_status(sc);
+
+      if (ble_bonding_handle != 0xFF)
+        {
+          sc = sl_bt_sm_delete_bonding(ble_bonding_handle);
+          app_assert_status(sc);
+
+          app_log_info("Successfully deleted bond %d\r\n", ble_bonding_handle);
+        }
+
       break;
 
     case sl_bt_evt_gatt_server_attribute_value_id:
