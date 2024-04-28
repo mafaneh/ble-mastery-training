@@ -35,7 +35,7 @@ static uint16_t sync;
 static uint32_t sync_timeout;
 
 // sub event to send response
-static uint8_t subevents = 4;
+static uint8_t subevents = 1;
 
 // data get in sub event report
 static uint8_t led_command;
@@ -89,8 +89,8 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
                                         200,
                                         200);
       app_assert_status(sc);
-      sc = sl_bt_scanner_start(gap_coded_phy,
-                               scanner_discover_observation);
+      sc = sl_bt_scanner_start(sl_bt_scanner_scan_phy_1m_and_coded,
+                               sl_bt_scanner_discover_observation);
       app_assert_status(sc);
 
       break;
@@ -148,8 +148,8 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
               evt->data.evt_sync_closed.sync);
 
       /* restart discovery */
-      sl_bt_scanner_start(gap_coded_phy,
-                          scanner_discover_observation);
+      sl_bt_scanner_start(sl_bt_scanner_scan_phy_1m_and_coded,
+                          sl_bt_scanner_discover_observation);
       break;
 
     // -------------------------------

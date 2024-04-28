@@ -9,6 +9,7 @@
 #include "sl_device_init_lfrco.h"
 #include "sl_device_init_clocks.h"
 #include "sl_device_init_emu.h"
+#include "sl_fem_util.h"
 #include "pa_conversions_efr32.h"
 #include "sl_rail_util_power_manager_init.h"
 #include "sl_rail_util_pti.h"
@@ -67,6 +68,7 @@ void sl_service_init(void)
 
 void sl_stack_init(void)
 {
+  sl_fem_util_init();
   sl_rail_util_pa_init();
   sl_rail_util_power_manager_init();
   sl_rail_util_pti_init();

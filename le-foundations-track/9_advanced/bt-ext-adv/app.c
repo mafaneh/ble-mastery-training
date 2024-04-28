@@ -194,6 +194,8 @@ void demo_setup_start_ext_adv(uint8_t handle)
 
   demo_setup_ext_adv(handle);
 
+  sl_bt_extended_advertiser_set_phy(handle, sl_bt_gap_phy_1m, sl_bt_gap_phy_coded);
+
   sc = sl_bt_extended_advertiser_start(
       handle,
       sl_bt_extended_advertiser_non_connectable,

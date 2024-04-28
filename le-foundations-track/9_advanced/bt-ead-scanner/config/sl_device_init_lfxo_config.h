@@ -43,7 +43,7 @@
 
 // <o SL_DEVICE_INIT_LFXO_CTUNE> CTUNE <0-127>
 // <i> Default: 63
-#define SL_DEVICE_INIT_LFXO_CTUNE          37
+#define SL_DEVICE_INIT_LFXO_CTUNE          25
 
 // <o SL_DEVICE_INIT_LFXO_PRECISION> LFXO precision in PPM <0-65535>
 // <i> Default: 50
@@ -66,25 +66,6 @@
 // <<< sl:start pin_tool >>>
 // <lfxo signal=(LFXTAL_O),(LFXTAL_I),(LF_EXTCLK)> SL_DEVICE_INIT_LFXO
 // $[LFXO_SL_DEVICE_INIT_LFXO]
-#ifndef SL_DEVICE_INIT_LFXO_PERIPHERAL          
-#define SL_DEVICE_INIT_LFXO_PERIPHERAL           LFXO
-#endif
-
-// LFXO LFXTAL_O on PD00
-#ifndef SL_DEVICE_INIT_LFXO_LFXTAL_O_PORT       
-#define SL_DEVICE_INIT_LFXO_LFXTAL_O_PORT        gpioPortD
-#endif
-#ifndef SL_DEVICE_INIT_LFXO_LFXTAL_O_PIN        
-#define SL_DEVICE_INIT_LFXO_LFXTAL_O_PIN         0
-#endif
-
-// LFXO LFXTAL_I on PD01
-#ifndef SL_DEVICE_INIT_LFXO_LFXTAL_I_PORT       
-#define SL_DEVICE_INIT_LFXO_LFXTAL_I_PORT        gpioPortD
-#endif
-#ifndef SL_DEVICE_INIT_LFXO_LFXTAL_I_PIN        
-#define SL_DEVICE_INIT_LFXO_LFXTAL_I_PIN         1
-#endif
 
 // [LFXO_SL_DEVICE_INIT_LFXO]$
 

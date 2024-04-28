@@ -1,6 +1,6 @@
 # Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
-project_name: bluetooth_pawr_thermometer_sensor
-label: bluetooth_pawr_thermometer_sensor
+project_name: bt-pawr-advertiser
+label: bt-pawr-advertiser
 description: |
   This project implements a PAwR-based Advertiser example.
 category: Bluetooth Examples
@@ -22,7 +22,7 @@ include:
 - path: ''
   file_list:
   - {path: app.h}
-sdk: {id: gecko_sdk, version: 4.3.2}
+sdk: {id: gecko_sdk, version: 4.4.2}
 toolchain_settings: []
 component:
 - {id: EFR32MG22C224F512IM40}
