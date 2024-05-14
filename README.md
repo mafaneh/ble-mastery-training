@@ -14,15 +14,12 @@ Focused on the foundation and basics of Bluetooth Low Energy, including:
 - Connections between LE devices (Generic Access Profile – GAP)
 - Data Transfer between LE devices (Attribute Protocol – ATT, Generic Attribute Profile – GATT)
 - Privacy and Security in Bluetooth LE
-- Advanced Topics: Extended Advertising, Periodic Advertising, and Periodic Advertising w Responses (PAwR)
+- Advanced Topics: Extended Advertising, Periodic Advertising, and Periodic Advertising w Responses (PAwR), Encrypted Advertising Data (EAD), and more!
 
 ### 2. LE Audio Kickstarter Track (Coming Soon!)
 Focused on the exciting new standard for Bluetooth Audio: LE Audio. This includes both connected and broadcast audio (Auracast™) standards.
 
-### 3. LE Trailblazer Track (Coming Soon!)
-Advanced training track focused on the latest in the Bluetooth specification and recently added features and Profiles. Training can be customized to your team's needs.
-
-### 4. Ellisys Bluetooth Mastery Track (Coming Soon!)
+### 3. Ellisys Bluetooth Mastery Track (Coming Soon!)
 Focused on using Ellisys' Bluetooth Protocol Analyzers (Sniffers) to understand and debug Bluetooth LE communication. 
 # More Information
 Learn more about the training program and request information here: https://novelbits.io/bluetooth-low-energy-mastery-training/
