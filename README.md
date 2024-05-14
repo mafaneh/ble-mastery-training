@@ -4,7 +4,7 @@ Repository for material, source code, and exercises used during Novel Bits Bluet
 Detailed information can be found here: https://novelbits.io/bluetooth-low-energy-mastery-training/
 
 ## Training Tracks
-### 1. LE Foundations Track
+### 1. LE Foundations Track (./core)
 Focused on the foundation and basics of Bluetooth Low Energy, including:
 - Introduction to Bluetooth Low Energy
 - Bluetooth LE vs. Classic (BR/EDR)
@@ -16,13 +16,13 @@ Focused on the foundation and basics of Bluetooth Low Energy, including:
 - Privacy and Security in Bluetooth LE
 - Advanced Topics: Extended Advertising, Periodic Advertising, and Periodic Advertising w Responses (PAwR)
 
-### 2. LE Audio Kickstarter Track
+### 2. LE Audio Kickstarter Track (Coming Soon!)
 Focused on the exciting new standard for Bluetooth Audio: LE Audio. This includes both connected and broadcast audio (Auracast™) standards.
 
-### 3. LE Trailblazer Track
+### 3. LE Trailblazer Track (Coming Soon!)
 Advanced training track focused on the latest in the Bluetooth specification and recently added features and Profiles. Training can be customized to your team's needs.
 
-### 4. Ellisys Bluetooth Mastery Track
+### 4. Ellisys Bluetooth Mastery Track (Coming Soon!)
 Focused on using Ellisys' Bluetooth Protocol Analyzers (Sniffers) to understand and debug Bluetooth LE communication. 
 # More Information
 Learn more about the training program and request information here: https://novelbits.io/bluetooth-low-energy-mastery-training/
