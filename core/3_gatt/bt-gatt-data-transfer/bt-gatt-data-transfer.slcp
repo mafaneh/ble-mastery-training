@@ -23,7 +23,7 @@ include:
 - path: ''
   file_list:
   - {path: app.h}
-sdk: {id: gecko_sdk, version: 4.4.2}
+sdk: {id: gecko_sdk, version: 4.4.3}
 toolchain_settings: []
 component:
 - {id: BGM220PC22HNA}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <model:MDescriptors xmlns:model="http://www.silabs.com/ss/Studio.ecore">
   <descriptors name="bt-per-adv">
-    <properties key="projectCommon.sdkId" value="com.silabs.sdk.stack.super:4.4.2._1065350470"/>
+    <properties key="projectCommon.sdkId" value="com.silabs.sdk.stack.super:4.4.3._1065350470"/>
     <properties key="universalConfig.generationDirectory" value=""/>
     <properties key="universalConfig.relativeWorkspacePath" value="../bt-per-adv.slcw"/>
     <properties key="universalConfig.toolchainCompatibility" value="iar gcc"/>
