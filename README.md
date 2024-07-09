@@ -20,6 +20,6 @@ Focused on the foundation and basics of Bluetooth Low Energy, including:
 Focused on the exciting new standard for Bluetooth Audio: LE Audio. This includes both connected and broadcast audio (Auracast™) standards.
 
 ### 3. Bluetooth Sniffer Mastery Track (Coming Soon!)
-Focused on using RFcreations' Bluetooth Protocol Analyzers (Sniffers) to understand and debug Bluetooth LE communication. 
+Focused on using RFcreations' Bluetooth Protocol Analyzers (Sniffers) to understand and debug Bluetooth LE communication. Learn more about RFcreations [here](https://novelbits.io/rfcreations).
 # More Information
 Learn more about the training program and request information here: https://novelbits.io/bluetooth-low-energy-mastery-training/
