@@ -19,7 +19,7 @@ Focused on the foundation and basics of Bluetooth Low Energy, including:
 ### 2. LE Audio Kickstarter Track (Coming Soon!)
 Focused on the exciting new standard for Bluetooth Audio: LE Audio. This includes both connected and broadcast audio (Auracast™) standards.
 
-### 3. Ellisys Bluetooth Mastery Track (Coming Soon!)
-Focused on using Ellisys' Bluetooth Protocol Analyzers (Sniffers) to understand and debug Bluetooth LE communication. 
+### 3. Bluetooth Sniffer Mastery Track (Coming Soon!)
+Focused on using RFcreations' Bluetooth Protocol Analyzers (Sniffers) to understand and debug Bluetooth LE communication. 
 # More Information
 Learn more about the training program and request information here: https://novelbits.io/bluetooth-low-energy-mastery-training/
