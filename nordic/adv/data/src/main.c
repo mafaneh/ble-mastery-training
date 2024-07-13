@@ -14,27 +14,21 @@
 #include <zephyr/bluetooth/bluetooth.h>
 #include <zephyr/bluetooth/hci.h>
 
+// Uncomment the following line to enable scannability and include scan response data in the advertising packet
+#define INCLUDE_SCAN_RESPONSE_DATA
+
 // Advertising Interval values are in the range of 20ms to 10.24s
 // The value is in units of 0.625ms (E.g., 160 -> 100ms, 320 -> 200ms, 400 -> 250ms, 1600 -> 1s, 10240 -> 10.24s)
-// Change the following values to test different advertising intervals
-#define ADV_INT_MIN 1600
-#define ADV_INT_MAX 1600
+#define ADV_INT_MIN 160
+#define ADV_INT_MAX 160
 
-// We are going to test the following advertising types:
-// Type_1: Non-connectable undirected advertising (scannable)
-#define TYPE_1 BT_LE_ADV_PARAM(BT_LE_ADV_OPT_CONNECTABLE | BT_LE_ADV_OPT_ONE_TIME | BT_LE_ADV_OPT_SCANNABLE, \
+#ifdef INCLUDE_SCAN_RESPONSE_DATA
+#define ADV_TYPE BT_LE_ADV_PARAM(BT_LE_ADV_OPT_SCANNABLE, \
                                ADV_INT_MIN, ADV_INT_MAX, NULL)
-
-// Type_2: Non-connectable undirected advertising (scannable)
-#define TYPE_2 BT_LE_ADV_PARAM(BT_LE_ADV_OPT_SCANNABLE, \
+#else 
+#define ADV_TYPE BT_LE_ADV_PARAM(BT_LE_ADV_OPT_NONE, \
                                ADV_INT_MIN, ADV_INT_MAX, NULL)
-
-// Type_3: Connectable undirected advertising (non-scannable)
-#define TYPE_3 BT_LE_ADV_PARAM(BT_LE_ADV_OPT_NONE, \
-                               ADV_INT_MIN, ADV_INT_MAX, NULL)
-
-// TODO: Change the value of ADV_TYPE to test the different advertising types defined above
-#define ADV_TYPE TYPE_1
+#endif
 
 #define DEVICE_NAME CONFIG_BT_DEVICE_NAME
 #define DEVICE_NAME_LEN (sizeof(DEVICE_NAME) - 1)
@@ -45,6 +39,21 @@
 static const struct bt_data ad[] = {
     BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN),
 };
+
+#ifdef INCLUDE_SCAN_RESPONSE_DATA
+
+// Company ID for Novel Bits (used for the manufacturer data)
+#define NOVEL_BITS_COMPANY_ID 0x08D3
+
+/* Set Scan Response data */
+/* The manufacturer data is included in the scan response data. */
+static const struct bt_data sd[] = {
+        BT_DATA_BYTES(BT_DATA_MANUFACTURER_DATA,
+                  (NOVEL_BITS_COMPANY_ID & 0xFF),
+                  ((NOVEL_BITS_COMPANY_ID >> 8) & 0xFF),
+                  0x01, 0x02, 0x03, 0x04, 0x05, 0x06),
+};
+#endif
 
 static void bt_ready(int err)
 {
@@ -60,8 +69,13 @@ static void bt_ready(int err)
     printk("Bluetooth initialized\n");
 
     /* Start advertising - */
+    #ifdef INCLUDE_SCAN_RESPONSE_DATA
+    err = bt_le_adv_start(ADV_TYPE, ad, ARRAY_SIZE(ad),
+                  sd, ARRAY_SIZE(sd));
+    #else
     err = bt_le_adv_start(ADV_TYPE, ad, ARRAY_SIZE(ad),
                   NULL, 0);
+    #endif
     if (err) {
         printk("Advertising failed to start (err %d)\n", err);
         return;
