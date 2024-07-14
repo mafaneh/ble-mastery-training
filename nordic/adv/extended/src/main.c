@@ -22,31 +22,44 @@
 #define DEVICE_NAME CONFIG_BT_DEVICE_NAME
 #define DEVICE_NAME_LEN (sizeof(DEVICE_NAME) - 1)
 
-/* Set Advertising data */
-/* The device name is included in the advertising data. */
-/* The device name is defined in prj.conf*/
-// static const struct bt_data ad[] = {
-//     BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN),
-// };
+// Adjust the following line to test different advertising options
+#define ADV_OPTION 3
 
+#if (ADV_OPTION == 1)
+// OPTION 1: Non-connectable non-scannable
+// - Includes device name in advertising data
+#define ADV_TYPE (BT_LE_ADV_OPT_EXT_ADV | BT_LE_ADV_OPT_USE_NAME)
+
+#elif (ADV_OPTION == 2)
+// OPTION 2: Non-connectable scannable
+// - Includes device name in advertising data
+// - Requires scan response data
+#define ADV_TYPE (BT_LE_ADV_OPT_EXT_ADV | BT_LE_ADV_OPT_SCANNABLE | BT_LE_ADV_OPT_USE_NAME)
 
 // Company ID for Novel Bits (used for the manufacturer data)
 #define NOVEL_BITS_COMPANY_ID 0x08D3
 
-/* Set Scan Response data */
-/* The manufacturer data is included in the scan response data. */
-static const struct bt_data ad[] = {
+/* This is only used in the scannable adv mode */
+static const struct bt_data sd[] = {
         BT_DATA_BYTES(BT_DATA_MANUFACTURER_DATA,
                   (NOVEL_BITS_COMPANY_ID & 0xFF),
                   ((NOVEL_BITS_COMPANY_ID >> 8) & 0xFF),
                   0x01, 0x02, 0x03, 0x04, 0x05, 0x06),
 };
 
+#elif (ADV_OPTION == 3)
+// OPTION 3: Connectable non-scannable
+// - Includes device name in advertising data
+#define ADV_TYPE (BT_LE_ADV_OPT_EXT_ADV | BT_LE_ADV_OPT_CONNECTABLE | BT_LE_ADV_OPT_USE_NAME)
+
+#endif 
+
 struct bt_le_adv_param adv_param = {
         .id = BT_ID_DEFAULT,
         .sid = 0U, /* Supply unique SID when creating advertising set */
         .secondary_max_skip = 0U,
-        .options = BT_LE_ADV_OPT_EXT_ADV | BT_LE_ADV_OPT_USE_NAME,
+        // Choose one of the options above
+        .options = ADV_TYPE,
         .interval_min = ADV_INT_MIN,
         .interval_max = ADV_INT_MAX,
         .peer = NULL,
@@ -66,7 +79,6 @@ static void bt_ready(int err)
 
     printk("Bluetooth initialized\n");
 
-    /* Create a non-connectable non-scannable advertising set */
     err = bt_le_ext_adv_create(&adv_param, NULL, &ext_adv);
     if (err) {
         printk("Failed to create advertising set (err %d)\n", err);
@@ -74,13 +86,21 @@ static void bt_ready(int err)
     }
 
     /* Set extended advertising data */
-    err = bt_le_ext_adv_set_data(ext_adv, ad, ARRAY_SIZE(ad),
-                        NULL, 0);
+
+    // In the case of scannable advertising, the scan response data must be set
+    #if (ADV_OPTION == 2)
+    err = bt_le_ext_adv_set_data(ext_adv, NULL, 0, sd, ARRAY_SIZE(sd));
     if (err) {
-        printk("Failed to set advertising data for set "
-                "(err %d)\n", err);
+        printk("Failed to set advertising data for set (err %d)\n", err);
         return;
     }
+    #else
+    err = bt_le_ext_adv_set_data(ext_adv, NULL, 0, NULL, 0);
+    if (err) {
+        printk("Failed to set advertising data for set (err %d)\n", err);
+        return;
+    }
+    #endif
 
     /* Start extended advertising set */
     err = bt_le_ext_adv_start(ext_adv, BT_LE_EXT_ADV_START_DEFAULT);
