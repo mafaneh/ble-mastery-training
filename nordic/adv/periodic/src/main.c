@@ -77,8 +77,6 @@ int main(void)
             }
             printk("done.\n");
         }
-
-        k_sleep(K_SECONDS(10));
     }
     return 0;
 }
