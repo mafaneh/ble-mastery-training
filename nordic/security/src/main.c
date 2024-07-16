@@ -31,7 +31,7 @@ static bool notify_enabled;
 #define ADV_INT_MIN 160
 #define ADV_INT_MAX 160
 
-#define ADV_TYPE BT_LE_ADV_PARAM(BT_LE_ADV_OPT_CONNECTABLE | BT_LE_ADV_OPT_ONE_TIME, \
+#define ADV_TYPE BT_LE_ADV_PARAM(BT_LE_ADV_OPT_CONNECTABLE, \
                                ADV_INT_MIN, ADV_INT_MAX, NULL)
 
 #define DEVICE_NAME CONFIG_BT_DEVICE_NAME
