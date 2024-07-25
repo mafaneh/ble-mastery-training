@@ -4,7 +4,7 @@ Repository for material, source code, and exercises used during Novel Bits Bluet
 Detailed information can be found here: https://novelbits.io/bluetooth-low-energy-mastery-training/
 
 ## Training Tracks
-### 1. LE Foundations Track (./core)
+### 1. LE Foundations Track (./nordic and ./silabs)
 Focused on the foundation and basics of Bluetooth Low Energy, including:
 - Introduction to Bluetooth Low Energy
 - Bluetooth LE vs. Classic (BR/EDR)
