@@ -1,8 +1,8 @@
 #include <stdbool.h>
-#include "em_core.h"
+#include "sl_core.h"
 #include "sl_power_manager.h"
 #include "sl_sleeptimer.h"
-#include "app_timer.h"
+#include "app_timer_internal.h"
 #include "sl_bluetooth.h"
 #include "sl_iostream_init_usart_instances.h"
 
@@ -18,6 +18,7 @@
  * @note  This function is called with the interrupt disabled and it MUST NOT be
  *        re-enabled.
  ******************************************************************************/
+  SL_CODE_CLASSIFY(SL_CODE_COMPONENT_POWER_MANAGER, SL_CODE_CLASS_TIME_CRITICAL)
 __WEAK bool app_is_ok_to_sleep(void)
 {
   return true;
@@ -52,6 +53,7 @@ __WEAK sl_power_manager_on_isr_exit_t app_sleep_on_isr_exit(void)
  * the software to cancel going to sleep in case of a last-minute event occurred
  * (window between the function call and interrupt disable).
  ******************************************************************************/
+ SL_CODE_CLASSIFY(SL_CODE_COMPONENT_POWER_MANAGER, SL_CODE_CLASS_TIME_CRITICAL)
 bool sl_power_manager_is_ok_to_sleep(void)
 {
   bool ok_to_sleep = true;
