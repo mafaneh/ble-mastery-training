@@ -5,6 +5,22 @@
 // [CMU]$
 
 // $[LFXO]
+// LFXO LFXTAL_I on PD01
+#ifndef LFXO_LFXTAL_I_PORT                      
+#define LFXO_LFXTAL_I_PORT                       gpioPortD
+#endif
+#ifndef LFXO_LFXTAL_I_PIN                       
+#define LFXO_LFXTAL_I_PIN                        1
+#endif
+
+// LFXO LFXTAL_O on PD00
+#ifndef LFXO_LFXTAL_O_PORT                      
+#define LFXO_LFXTAL_O_PORT                       gpioPortD
+#endif
+#ifndef LFXO_LFXTAL_O_PIN                       
+#define LFXO_LFXTAL_O_PIN                        0
+#endif
+
 // [LFXO]$
 
 // $[PRS.ASYNCH0]
@@ -94,22 +110,6 @@
 // [TIMER4]$
 
 // $[USART0]
-// USART0 RX on PA06
-#ifndef USART0_RX_PORT                          
-#define USART0_RX_PORT                           gpioPortA
-#endif
-#ifndef USART0_RX_PIN                           
-#define USART0_RX_PIN                            6
-#endif
-
-// USART0 TX on PA05
-#ifndef USART0_TX_PORT                          
-#define USART0_TX_PORT                           gpioPortA
-#endif
-#ifndef USART0_TX_PIN                           
-#define USART0_TX_PIN                            5
-#endif
-
 // [USART0]$
 
 // $[I2C1]
@@ -152,20 +152,20 @@
 // [EUSART0]$
 
 // $[PTI]
-// PTI DFRAME on PC07
+// PTI DFRAME on PC05
 #ifndef PTI_DFRAME_PORT                         
 #define PTI_DFRAME_PORT                          gpioPortC
 #endif
 #ifndef PTI_DFRAME_PIN                          
-#define PTI_DFRAME_PIN                           7
+#define PTI_DFRAME_PIN                           5
 #endif
 
-// PTI DOUT on PC06
+// PTI DOUT on PC04
 #ifndef PTI_DOUT_PORT                           
 #define PTI_DOUT_PORT                            gpioPortC
 #endif
 #ifndef PTI_DOUT_PIN                            
-#define PTI_DOUT_PIN                             6
+#define PTI_DOUT_PIN                             4
 #endif
 
 // [PTI]$
@@ -174,7 +174,55 @@
 // [MODEM]$
 
 // $[CUSTOM_PIN_NAME]
+#ifndef _PORT                                   
+#define _PORT                                    gpioPortA
+#endif
+#ifndef _PIN                                    
+#define _PIN                                     0
+#endif
+
 // [CUSTOM_PIN_NAME]$
 
 #endif // PIN_CONFIG_H
+
+// $[USART1]
+// USART1 CTS on PA08
+#ifndef USART1_CTS_PORT                         
+#define USART1_CTS_PORT                          gpioPortA
+#endif
+#ifndef USART1_CTS_PIN                          
+#define USART1_CTS_PIN                           8
+#endif
+
+// USART1 RTS on PA07
+#ifndef USART1_RTS_PORT                         
+#define USART1_RTS_PORT                          gpioPortA
+#endif
+#ifndef USART1_RTS_PIN                          
+#define USART1_RTS_PIN                           7
+#endif
+
+// USART1 RX on PA06
+#ifndef USART1_RX_PORT                          
+#define USART1_RX_PORT                           gpioPortA
+#endif
+#ifndef USART1_RX_PIN                           
+#define USART1_RX_PIN                            6
+#endif
+
+// USART1 TX on PA05
+#ifndef USART1_TX_PORT                          
+#define USART1_TX_PORT                           gpioPortA
+#endif
+#ifndef USART1_TX_PIN                           
+#define USART1_TX_PIN                            5
+#endif
+
+// [USART1]$
+
+// $[PDM]
+// [PDM]$
+
+// $[EUART0]
+// [EUART0]$
 
