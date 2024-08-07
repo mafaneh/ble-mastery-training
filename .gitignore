@@ -2,4 +2,6 @@
 */*- Release
 .DS_Store
 *[build]
+*[.pdm]
+*[.settings]
 .vscode
